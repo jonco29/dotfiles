@@ -1,0 +1,10 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =8
+let g:netrw_dirhist_1='/space/work/android/cyan-s3/vendor/samsung'
+let g:netrw_dirhist_2='/space/work/android/cyan-s3/vendor/samsung/d2att'
+let g:netrw_dirhist_3='/home/jc/work/android/examples/KnowlesWakeupService'
+let g:netrw_dirhist_4='/home/jc/work/android/examples/KnowlesWakeupService/assets'
+let g:netrw_dirhist_5='/media/jc/bd43d858-cd00-49f4-8a50-24f61e0bd2f3/jc2/workspace/.metadata/.plugins/org.eclipse.core.runtime/.settings'
+let g:netrw_dirhist_6='/home/jonco/work/adt-bundle-linux-x86_64/eclipse/readme'
+let g:netrw_dirhist_7='/media/jc/bd43d858-cd00-49f4-8a50-24f61e0bd2f3/jc/work/adt-bundle-linux-x86_64/eclipse/configuration/.settings'
+let g:netrw_dirhist_8='/home/jonco/eclipse_workspaces/workspace/.metadata/.plugins/org.eclipse.core.resources/.projects/KnowlesGasSensor'
