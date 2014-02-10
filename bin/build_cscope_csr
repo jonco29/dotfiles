@@ -1,0 +1,14 @@
+#!/usr/local/bin/bash
+
+rm -rf tags cscope.*
+
+cat /c/Headset-ADK1.1/headset_lib_cscope.files.linux > tmp.cscope.files
+find . -iname '*.[ch]' -print >> tmp.cscope.files
+
+cat tmp.cscope.files |sed '/\.h$/d'|sort > cscope.files
+cat tmp.cscope.files |sed '/\.c$/d'|sort >> cscope.files
+rm tmp.cscope.files
+
+ctags --c-kinds=+p -L cscope.files && cscope -k -C -b -i cscope.files 
+
+

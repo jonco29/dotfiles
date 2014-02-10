@@ -1,0 +1,3 @@
+#!/usr/local/bin/bash
+
+gvim "+unmap qa"  --servername cscope_editor --remote-tab $*

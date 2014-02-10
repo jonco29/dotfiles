@@ -1,0 +1,20 @@
+#!/usr/local/bin/bash
+
+if [[ -e tags ]]; then
+    rm -rf tags
+fi;
+
+echo "finding all *.[ch] files"
+find . -iname '*.[ch]' -print > cscope.files
+
+echo "finding all *.[ch]pp files"
+find . -iname '*.[ch]pp' -print >> cscope.files
+
+echo "building ctags..."
+ctags -L  cscope.files
+
+echo building cscope database
+cscope  -i cscope.files -b -k
+
+
+cscope -C 
