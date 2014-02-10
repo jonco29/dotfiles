@@ -1,0 +1,64 @@
+[user]
+	email = jonco29@gmail.com
+	name = Jonathan Conway
+
+[color]
+	ui = auto
+
+[color "status"]
+    added = bold yellow
+    changed = bold green
+    untracked = cyan
+    #branch = magenta
+    branch = bold yellow
+    
+    ## available colors
+    # normal
+    # black
+    # red
+    # green
+    # yellow
+    # blue
+    # magenta
+    # cyan
+    # white
+    ## available color attributes
+    # bold
+    # dim
+    # ul
+    # blink
+    # reverse
+
+
+[diff]
+   tool = default-difftool
+
+
+[difftool "default-difftool"]
+    prompt = false
+#    cmd = gvim -do $2 $5
+#    cmd = git_diff.sh  $LOCAL $REMOTE
+#    cmd = gvim -f -do $LOCAL $REMOTE
+     cmd = /c/Vim/vim74/gvim -f -do $LOCAL $REMOTE
+
+[alias]
+	co = checkout
+    ci = commit
+    lsco = diff --name-only
+    ls = rev-parse HEAD 
+[man]
+	viewer = catman
+[man "catman"]
+	cmd = man -P cat
+[core]
+    #pager = cat
+	pager = less
+    autocrlf = input
+    safecrlf = false
+
+
+[gui]
+	recentrepo = C:/Users/jconway/Documents/vhdl/iSine
+
+
+
