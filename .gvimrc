@@ -13,6 +13,7 @@ set ru
 set nrformats=hex,alpha
 set ul=100
 "set backupdir=d:/Temp
+"set dir=".,c:\tmp,c:\temp"
 
 
 "set tags=./tags,tags,./tags.local
@@ -148,18 +149,18 @@ set cwh=150
 set vb
 "let g:ccaseUseDialog=0	" Don't use dialog boxes
 set lbr
-set diffexpr=MyDiff()
-function MyDiff()
-   let opt = ""
-   if &diffopt =~ "icase"
-     let opt = opt . "-i "
-   endif
-   if &diffopt =~ "iwhite"
-     let opt = opt . "-w -B "
-   endif
-   silent execute "!diff -a --binary " . opt . v:fname_in . " " . v:fname_new .
-	\  " > " . v:fname_out
-endfunction
+" set diffexpr=MyDiff()
+" function MyDiff()
+"    let opt = ""
+"    if &diffopt =~ "icase"
+"      let opt = opt . "-i "
+"    endif
+"    if &diffopt =~ "iwhite"
+"      let opt = opt . "-w -B "
+"    endif
+"    silent execute "!diff -a --binary " . opt . v:fname_in . " " . v:fname_new .
+" 	\  " > " . v:fname_out
+" endfunction
 
 " function to start numbering
 let g:jc_current_number = 1
@@ -388,3 +389,4 @@ function! GuiTabLabel()
 endfunction
 set guitablabel=%{GuiTabLabel()}
 
+set lines=25 columns=120
