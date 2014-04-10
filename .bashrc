@@ -76,7 +76,7 @@ if [ -x /usr/bin/dircolors ]; then
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
-    export LS_COLORS='ex=91:di=33:ln=90;1'
+    #export LS_COLORS='ex=91:di=33:ln=90;1'
 fi
 
 # some more ls aliases
