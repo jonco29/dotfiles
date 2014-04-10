@@ -6,11 +6,17 @@
 	ui = auto
 
 [color "status"]
-    added = bold yellow
-    changed = bold green
+    added = bold red
+    changed = bold blue
     untracked = cyan
     #branch = magenta
-    branch = bold yellow
+    branch = bold magenta
+
+    ## added = bold yellow
+    ## changed = bold green
+    ## untracked = cyan
+    ## #branch = magenta
+    ## branch = bold yellow
     
     ## available colors
     # normal
@@ -39,6 +45,7 @@
 #    cmd = gvim -do $2 $5
 #    cmd = git_diff.sh  $LOCAL $REMOTE
 #    cmd = gvim -f -do $LOCAL $REMOTE
+
      cmd = /c/Vim/vim74/gvim -f -do $LOCAL $REMOTE
 
 [alias]

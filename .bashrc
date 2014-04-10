@@ -1,3 +1,4 @@
+echo "start of ~/.bashrc"
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -55,16 +56,16 @@ fi
 ##     #PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 ##     PS1='${debian_chroot:+($debian_chroot)}[\u@\h:\W]$ '
 ## fi
-unset color_prompt force_color_prompt
+## unset color_prompt force_color_prompt
 
-# If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
+## # If this is an xterm set the title to user@host:dir
+## case "$TERM" in
+## xterm*|rxvt*)
+##     PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+##     ;;
+## *)
+##     ;;
+## esac
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -78,15 +79,15 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
     export LS_COLORS='ex=91:di=33:ln=90;1'
 else
-    alias ls='ls -F --color=auto'
+    #alias ls='ls -F --color=auto'
+    alias ls='ls -F '
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
 
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
+    #alias grep='grep --color=auto'
+    #alias fgrep='fgrep --color=auto'
+    #alias egrep='egrep --color=auto'
     export LS_COLORS='ex=91:di=33:ln=90;1'
-
 fi
 
 # some more ls aliases
@@ -95,13 +96,16 @@ alias la='ls -A'
 alias l='ls -CF'
 #alias adb='sudo /home/jc/bin/adb'
 #alias fastboot='sudo /home/jc/bin/fastboot'
-alias cs='if [ -s cscope.out ]; then echo -ne "\033]0;cscope    ---    $(basename $(pwd)) \007"; cscope -C -d csope.out ; else cscope -C -i cscope.files; fi'
+#alias cs='if [ -s cscope.out ]; then echo -ne "\033]0;cscope    ---    $(basename $(pwd)) \007"; cscope -C -d csope.out ; else cscope -C -i cscope.files; fi'
+alias cs='if [ -s cscope.out ]; then echo -ne "\033]0;cscope    ---    $(pwd) \007"; cscope -C -d csope.out ; else cscope -C -i cscope.files; fi'
 alias jmaguro='cd ~/space/work/android/maguro'
 alias jc_date='date +"%m%d-%I%M"'
 alias setup_maguro='source build/envsetup.sh && lunch full_maguro-userdebug && source ~/bin/setup_linux_cross_compile.sh'
 alias setup_panda='source build/envsetup.sh && lunch full_panda-userdebug && source ~/bin/setup_linux_cross_compile.sh'
 alias setup_mako='source build/envsetup.sh && lunch full_mako-userdebug && source ~/bin/setup_linux_cross_compile.sh'
 alias setup_hammerhead='source build/envsetup.sh && lunch aosp_hammerhead-userdebug && source ~/bin/setup_linux_cross_compile.sh'
+
+alias run="cmd \\\/c "
 
 alias pfunc='perldoc -f'
 # Alias definitions.
@@ -121,22 +125,28 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 
 alias int_perl='perl -d -e42'
-#alias gvim="start /c/vim/vim74/gvim.exe "
-alias gvim="cmd \\\/c gvim.bat"
 export PAGER='less -Xisr'
 export GREP_OPTIONS=' --directories=skip '
 #export PS1="[\W]$ "
-export PATH=/home/jonco/bin:$PATH
-export VISUAL=gvim
-export CSCOPE_EDITOR=gvim
-#export JAVA_HOME=/usr/lib/jvm/jdk1.6.0_31
-#export PATH=/usr/lib/jvm/jdk1.6.0_31/bin:$PATH
-export JAVA_HOME=/home/jc/java/jdk1.6.0_45
+#export VISUAL=gvim
+export VISUAL='gvim.bat -f'
+export CSCOPE_EDITOR=gvim.bat
+export JAVA_HOME=/c/Java/jdk1.6.0_45
 export PATH=$JAVA_HOME/bin:$PATH
+export PATH=$PATH:/c/MinGW/bin:/c/MinGw/msys/1.0/bin
 export LESS="-Xisr"
+alias cs_ed_def='export CSCOPE_EDITOR=gvim.bat'
+alias cs_ed='export CSCOPE_EDITOR=cscope-ed.sh'
+alias cs_ed1='export CSCOPE_EDITOR=cscope-ed.sh'
+alias cs_ed2='export CSCOPE_EDITOR=cscope-ed2.sh'
+
 #gvim() { setsid /usr/bin/gvim -f "$@";}
 
 export GIT_EDITOR='gvim -f'
+#alias gvim="start /c/vim/vim74/gvim.exe "
+#alias gvim="cmd \\\/c /c/vim/vim74/gvim"
+#alias gvim="cmd \\\/c /c/Users/hrkv84-sc/bin/gvim.bat"
+alias gvim="cmd \\\/c gvim.bat"
 
 function dec2hex { echo "$*" |bc ~/bin/bc.dec2hex; }
 function hex2dec { echo "$*"|tr '[a-z]' '[A-Z]' |bc ~/bin/bc.hex2dec; }
@@ -189,5 +199,10 @@ function pull_wav ()
     mplayer -benchmark -vc null -vo null -ao pcm:waveheader $*
 }
 
+alias clt=cleartool
+alias xdiff=xdiff.bat
 
-export PATH="/opt/microchip/xc32/v1.21/bin":$PATH
+source ~/bin/jc_bash_functions.sh
+export TMPDIR=c:/Temp
+
+echo "end of ~/.bashrc"

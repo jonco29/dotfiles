@@ -13,7 +13,6 @@ set ru
 set nrformats=hex,alpha
 set ul=100
 "set backupdir=d:/Temp
-"set dir=".,c:\tmp,c:\temp"
 
 
 "set tags=./tags,tags,./tags.local
@@ -80,10 +79,13 @@ map <A-h>   :tabp<CR>
 map <A-j>   :tabp<CR>
 
 "if v:ctype !~ "C"
-if &shell !~ "sh"
+"if &shell !~ "sh"
     "this is a windows instance
     "set guifont=6x13:h8
-    set guifont=Lucida_Console:h10:cANSI
+    "set guifont=Lucida_Console:h10:cANSI
+    "set guifont=Lucida_Console:h8:cANSI
+    set guifont=Courier_New:h8:cANSI 
+
     set mouse=a
     set sh=cmd.exe
     set shellcmdflag=/C
@@ -95,35 +97,35 @@ if &shell !~ "sh"
     "context is # of lines between diff threshold before folding
     set diffopt=iwhite,filler,context:10000
     
-else
-    " this is a cygwin instance
-    "set guifont=-schumacher-clean-medium-r-normal-*-*-120-*-*-c-*-iso646.1991-irv
-    "set guifont=Fixed\ 6
-    "set guifont=Monospace\ 6
-    "set guifont=Monospace\ 7
-    set guifont=Monospace\ 8
-    "set guifont==Fixed\ Semi-Condensed:8
-    " if you want side by side diffs, add 'vertical to diffopt
-    "set diffopt=iwhite,vertical
-    " horizontal is the up/down diffs
-    "set diffopt=iwhite
-    set diffopt=iwhite,filler,context:10000
-    "colorscheme elflord
-
-    " if &term =~ "xterm"
-    "   if has("terminfo")
-    " 	set t_Co=8
-    " 	set t_Sf=<Esc>[3%p1%dm
-    " 	set t_Sb=<Esc>[4%p1%dm
-    "   else
-    " 	set t_Co=8
-    " 	set t_Sf=<Esc>[3%dm
-    " 	set t_Sb=<Esc>[4%dm
-    "   endif
-    " endif
-	" :set t_AB=<Esc>[%?%p1%{8}%<%t25;%p1%{40}%+%e5;%p1%{32}%+%;%dm
-	" :set t_AF=<Esc>[%?%p1%{8}%<%t22;%p1%{30}%+%e1;%p1%{22}%+%;%dm
-endif
+" else
+"     " this is a cygwin instance
+"     "set guifont=-schumacher-clean-medium-r-normal-*-*-120-*-*-c-*-iso646.1991-irv
+"     "set guifont=Fixed\ 6
+"     "set guifont=Monospace\ 6
+"     "set guifont=Monospace\ 7
+"     set guifont=Monospace\ 8
+"     "set guifont==Fixed\ Semi-Condensed:8
+"     " if you want side by side diffs, add 'vertical to diffopt
+"     "set diffopt=iwhite,vertical
+"     " horizontal is the up/down diffs
+"     "set diffopt=iwhite
+"     set diffopt=iwhite,filler,context:10000
+"     "colorscheme elflord
+" 
+"     " if &term =~ "xterm"
+"     "   if has("terminfo")
+"     " 	set t_Co=8
+"     " 	set t_Sf=<Esc>[3%p1%dm
+"     " 	set t_Sb=<Esc>[4%p1%dm
+"     "   else
+"     " 	set t_Co=8
+"     " 	set t_Sf=<Esc>[3%dm
+"     " 	set t_Sb=<Esc>[4%dm
+"     "   endif
+"     " endif
+" 	" :set t_AB=<Esc>[%?%p1%{8}%<%t25;%p1%{40}%+%e5;%p1%{32}%+%;%dm
+" 	" :set t_AF=<Esc>[%?%p1%{8}%<%t22;%p1%{30}%+%e1;%p1%{22}%+%;%dm
+" endif
 
 
 " latex-vim changes
@@ -149,7 +151,7 @@ set cwh=150
 set vb
 "let g:ccaseUseDialog=0	" Don't use dialog boxes
 set lbr
-" set diffexpr=MyDiff()
+set diffexpr=MyDiff()
 " function MyDiff()
 "    let opt = ""
 "    if &diffopt =~ "icase"
@@ -389,4 +391,8 @@ function! GuiTabLabel()
 endfunction
 set guitablabel=%{GuiTabLabel()}
 
+
+
 set lines=25 columns=120
+set nowrap
+nmap ,f :e ++ff=dos<CR>
