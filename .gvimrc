@@ -33,28 +33,29 @@ hi DiffText term=bold guibg=cyan guifg=black
 "  hi Ignore     ctermfg=white guifg=bg
 
 "macros
-map _get_fns     :r!mkptypes %\|awk '/^[a-zA-Z]/{print $2}'
-map _xvt         :!xvt %&<CR>
-map _get_filename  qz:r!echo `basename %`<CR>"xyyuq
-map _set_c       :set syntax=c<CR>
-map _c           :set syntax=c<CR>
-map _pl          :set syntax=perl<CR>
-map _tcl         :set syntax=tcl<CR>
-map _basic       :cal SetSyn("basic")<CR>
-map _vb          :cal SetSyn("vb")<CR>
-map _spell       :!aspell check %<CR>:e! %<CR>
-map _jsyn        :cal SetSyn("java")<CR>
-map _c++        :cal SetSyn("cpp")<CR>
-map _+<space>       : s;\([0-9a-f]\{2,2}\);\1 ;gi<CR>
-map _-<space>       : s;\([0-9a-f]\{2,2}\) ;\1;gi<CR>
-map _+A<space>       : %s;\([0-9a-f]\{2,2}\);\1 ;gi<CR>
-map _-A<space>       : %s;\([0-9a-f]\{2,2}\) ;\1;gi<CR>
-map _-flip           :s;\([0-9a-f]\{2,2}\)\([0-9a-f]\{2,2}\)\([0-9a-f]\{2,2}\)\([0-9a-f]\{2,2}\);\4\3\2\1;g
+let mapleader = "_"
+noremap <leader>get_fns     :r!mkptypes %\|awk '/^[a-zA-Z]/{print $2}'
+noremap <leader>xvt         :!xvt %&<CR>
+noremap <leader>get_filename  qz:r!echo `basename %`<CR>"xyyuq
+noremap <leader>set_c       :set syntax=c<CR>
+noremap <leader>c           :set syntax=c<CR>
+noremap <leader>pl          :set syntax=perl<CR>
+noremap <leader>tcl         :set syntax=tcl<CR>
+noremap <leader>basic       :cal SetSyn("basic")<CR>
+noremap <leader>vb          :cal SetSyn("vb")<CR>
+noremap <leader>spell       :!aspell check %<CR>:e! %<CR>
+noremap <leader>jsyn        :cal SetSyn("java")<CR>
+noremap <leader>c++        :cal SetSyn("cpp")<CR>
+noremap <leader>+<space>       : s;\([0-9a-f]\{2,2}\);\1 ;gi<CR>
+noremap <leader>-<space>       : s;\([0-9a-f]\{2,2}\) ;\1;gi<CR>
+noremap <leader>+A<space>       : %s;\([0-9a-f]\{2,2}\);\1 ;gi<CR>
+noremap <leader>-A<space>       : %s;\([0-9a-f]\{2,2}\) ;\1;gi<CR>
+noremap <leader>-flip           :s;\([0-9a-f]\{2,2}\)\([0-9a-f]\{2,2}\)\([0-9a-f]\{2,2}\)\([0-9a-f]\{2,2}\);\4\3\2\1;g
 "map _indent :%!indent -bl -bli0 -i4 -l80 -nut -npsl -
-map _indent :%!indent -bl -bli0 -i4  -nut -npsl -l120 -
+noremap <leader>indent :%!indent -bl -bli0 -i4  -nut -npsl -l120 -
 "map _indent :%!indent -bl -bli0 -i4  -nut -npsl -l80 -
-map qa          :qa<CR>
-map _ccb            :%s,^[^\t]\+\t\([^\t]\+\t[^\t]\+\).*,\1,g
+noremap qa          :qa<CR>
+noremap <leader>ccb            :%s,^[^\t]\+\t\([^\t]\+\t[^\t]\+\).*,\1,g
 
 
 " key mappings which save off the previous search string buffer
@@ -63,20 +64,20 @@ map _ccb            :%s,^[^\t]\+\t\([^\t]\+\t[^\t]\+\).*,\1,g
 "map }} :let @j=@/<CR>j/^[ 	]\{2,4\}{<CR>:let @/=""<CR>:let @/=@j<CR>
 "map {{ :let @j=@/<CR>k?^[ 	]\{2,4\}{<CR>:let @/=""<CR>:let @/=@j<CR>
 
-map }} :let @j=@/<CR>j/^ *\(\w\+ \)\(\w\+[ \[\]]*\)\{1,10}(.*).*\n* *{<CR>:let @/=@j<CR>
-map {{ :let @j=@/<CR>k?^ *\(\w\+ \)\(\w\+[ \[\]]*\)\{1,10}(.*).*\n* *{<CR>:let @/=@j<CR>
+noremap }} :let @j=@/<CR>j/^ *\(\w\+ \)\(\w\+[ \[\]]*\)\{1,10}(.*).*\n* *{<CR>:let @/=@j<CR>
+noremap {{ :let @j=@/<CR>k?^ *\(\w\+ \)\(\w\+[ \[\]]*\)\{1,10}(.*).*\n* *{<CR>:let @/=@j<CR>
 
 :inoremap # X#
 set tags=tags,tags.jc
-map vbfn /\*\{20,<CR>
+noremap vbfn /\*\{20,<CR>
 "set guifont=-schumacher-clean-medium-r-normal-*-*-100-*-*-c-*-iso646.1991-irv
 "set guifont=-schumacher-clean-medium-r-normal-*-*-120-*-*-c-*-iso646.1991-irv
 "set guifont=-adobe-courier-medium-r-normal-*-*-120-*-*-m-*-iso8859-9
-map <C-r>   :redo<Esc>
-map <A-l>   :tabn<CR>
-map <A-k>   :tabn<CR>
-map <A-h>   :tabp<CR>
-map <A-j>   :tabp<CR>
+noremap <C-r>   :redo<Esc>
+noremap <A-l>   :tabn<CR>
+noremap <A-k>   :tabn<CR>
+noremap <A-h>   :tabp<CR>
+noremap <A-j>   :tabp<CR>
 
 "if v:ctype !~ "C"
 if &shell !~ "sh"
@@ -100,7 +101,7 @@ else
     "set guifont=Fixed\ 6
     "set guifont=Monospace\ 6
     "set guifont=Monospace\ 7
-    set guifont=Monospace\ 8
+    set guifont=Monospace\ 10
     "set guifont==Fixed\ Semi-Condensed:8
     " if you want side by side diffs, add 'vertical to diffopt
     "set diffopt=iwhite,vertical
@@ -149,7 +150,7 @@ set vb
 "let g:ccaseUseDialog=0	" Don't use dialog boxes
 set lbr
 set diffexpr=MyDiff()
-function MyDiff()
+function! MyDiff()
    let opt = ""
    if &diffopt =~ "icase"
      let opt = opt . "-i "
@@ -184,11 +185,11 @@ fu! Number()
     let g:jc_current_number = g:jc_current_number + 1
 endf
 
-" command to set StartNumber to a value if it exists
-:command -nargs=* StartNumber :call StartNumber(<f-args>)
-" maps to number & set the start number to 1
-map <F2> :call StartNumber()<CR>
-map <F3> :call Number()<CR>j
+"" command to set StartNumber to a value if it exists
+":command -nargs=* StartNumber :call StartNumber(<f-args>)
+"" maps to number & set the start number to 1
+"noremap <F2> :call StartNumber()<CR>
+"noremap <F3> :call Number()<CR>j
 
 " function to do a clearcase diff on the current branch
 " "will by default do the predecessor
@@ -226,7 +227,7 @@ map <F3> :call Number()<CR>j
     exe ":diffsplit "tmp
 endfu
 " wrapper command for easier invocation
-:command -nargs=* Ctb :call Clt_diff_same_branch(<f-args>)
+:command! -nargs=* Ctb :call Clt_diff_same_branch(<f-args>)
 
 
 
@@ -252,7 +253,7 @@ endfu
     exe ":diffsplit " my_file
 endf
 " wrapper command for easier invocation
-:command -nargs=* Cto :call Clt_diff_other_branch(<f-args>)
+:command! -nargs=* Cto :call Clt_diff_other_branch(<f-args>)
     
 " command to do a clearcase diff against another version on main
 " if another branch is not supplied, it will diff
@@ -271,7 +272,7 @@ endf
     exe ":diffsplit " my_file
 endf
 " wrapper command for easier invocation
-:command -nargs=* Ctm :call Clt_diff_main_branch(<f-args>)
+:command! -nargs=* Ctm :call Clt_diff_main_branch(<f-args>)
 
 " command to do a clearcase diff against this file with a tag
 :fu! Clt_diff_tag(...)
@@ -288,11 +289,11 @@ endf
     exe ":diffsplit " my_file
 endf
 " wrapper command for easier invocation
-:command -nargs=* Ctt :call Clt_diff_tag(<f-args>)
-map ctm :Ctm
-map ctb :Ctb
-map cto :Cto
-map ctt :Ctt
+:command! -nargs=* Ctt :call Clt_diff_tag(<f-args>)
+noremap ctm :Ctm
+noremap ctb :Ctb
+noremap cto :Cto
+noremap ctt :Ctt
     
 
 fu! Get_file_name ()
@@ -349,7 +350,7 @@ endif
     exe ":f " my_file
 endf
 " wrapper command for easier invocation
-:command -nargs=* RN :call Remove_New(<f-args>)
+:command! -nargs=* RN :call Remove_New(<f-args>)
 syntax on
 set nu
 
@@ -387,4 +388,21 @@ function! GuiTabLabel()
   return label . '  [' . wincount . ']'
 endfunction
 set guitablabel=%{GuiTabLabel()}
+
+"echo ">^.^<"
+" vimscript stuff
+nnoremap <c-u> viwU<esc>
+inoremap <c-u> <esc><c-u>
+inoremap jk <esc>
+
+"auto commands to format when writing
+augroup format_write
+    autocmd!
+    autocmd BufWritePre *.html :normal gg=G
+    autocmd BufWritePre *.[ch] :normal gg=G
+augroup END
+
+autocmd FileType python :iabbrev <buffer> iff if:<left>
+autocmd FileType javascript :iabbrev <buffer> iff if ()<left>
+
 
