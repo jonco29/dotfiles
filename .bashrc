@@ -77,7 +77,8 @@ if [ -x /usr/bin/dircolors ]; then
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
-    export LS_COLORS='ex=91:di=33:ln=90;1'
+    #export LS_COLORS='ex=91:di=33:ln=90;1'
+    export LS_COLORS='ex=91:di=34:ln=90;1'
 else
     #alias ls='ls -F --color=auto'
     alias ls='ls -F '
@@ -130,7 +131,10 @@ export GREP_OPTIONS=' --directories=skip '
 #export PS1="[\W]$ "
 #export VISUAL=gvim
 export VISUAL='gvim.bat -f'
-export CSCOPE_EDITOR=gvim.bat
+#export CSCOPE_EDITOR=gvim.bat
+#export CSCOPE_EDITOR=gvim.bat
+export CSCOPE_EDITOR=cscope-edx.sh
+export CS_NUM=1
 export JAVA_HOME=/c/Java/jdk1.6.0_45
 export PATH=$JAVA_HOME/bin:$PATH
 export PATH=$PATH:/c/MinGW/bin:/c/MinGw/msys/1.0/bin
@@ -204,5 +208,6 @@ alias xdiff=xdiff.bat
 
 source ~/bin/jc_bash_functions.sh
 export TMPDIR=c:/Temp
+export CYGWIN=nodosfilewarning
 
 echo "end of ~/.bashrc"

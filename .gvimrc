@@ -13,6 +13,11 @@ set ru
 set nrformats=hex,alpha
 set ul=100
 "set backupdir=d:/Temp
+autocmd VimResized * wincmd =
+
+if &diff
+    win 120 120
+endif
 
 
 "set tags=./tags,tags,./tags.local
@@ -33,6 +38,7 @@ hi DiffText term=bold guibg=cyan guifg=black
 "  hi Ignore     ctermfg=white guifg=bg
 
 "macros
+map -0          :ct0dif<CR>
 map _get_fns     :r!mkptypes %\|awk '/^[a-zA-Z]/{print $2}'
 map _xvt         :!xvt %&<CR>
 map _get_filename  qz:r!echo `basename %`<CR>"xyyuq
@@ -49,7 +55,7 @@ map _+<space>       : s;\([0-9a-f]\{2,2}\);\1 ;gi<CR>
 map _-<space>       : s;\([0-9a-f]\{2,2}\) ;\1;gi<CR>
 map _+A<space>       : %s;\([0-9a-f]\{2,2}\);\1 ;gi<CR>
 map _-A<space>       : %s;\([0-9a-f]\{2,2}\) ;\1;gi<CR>
-map _-flip           :s;\([0-9a-f]\{2,2}\)\([0-9a-f]\{2,2}\)\([0-9a-f]\{2,2}\)\([0-9a-f]\{2,2}\);\4\3\2\1;g
+map _-flip           :s;\([0-9a-f]\{2,2}\)\([0-9a-f]\{2,2}\)\([0-9a-f]\{2,2}\)\([0-9a-f]\{2,2}\);\4\3\2\1;g<CR>
 "map _indent :%!indent -bl -bli0 -i4 -l80 -nut -npsl -
 map _indent :%!indent -bl -bli0 -i4  -nut -npsl -l120 -
 "map _indent :%!indent -bl -bli0 -i4  -nut -npsl -l80 -
@@ -67,7 +73,8 @@ map }} :let @j=@/<CR>j/^ *\(\w\+ \)\(\w\+[ \[\]]*\)\{1,10}(.*).*\n* *{<CR>:let @
 map {{ :let @j=@/<CR>k?^ *\(\w\+ \)\(\w\+[ \[\]]*\)\{1,10}(.*).*\n* *{<CR>:let @/=@j<CR>
 
 :inoremap # X#
-set tags=tags,tags.jc
+"set tags=tags,tags.jc
+execute "set tags=" . getcwd() ."/tags" . ",./tags"
 map vbfn /\*\{20,<CR>
 "set guifont=-schumacher-clean-medium-r-normal-*-*-100-*-*-c-*-iso646.1991-irv
 "set guifont=-schumacher-clean-medium-r-normal-*-*-120-*-*-c-*-iso646.1991-irv
