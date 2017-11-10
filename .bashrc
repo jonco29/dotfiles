@@ -112,7 +112,7 @@ fi
 
 alias int_perl='perl -d -e42'
 export PAGER='less -Xisr'
-export GREP_OPTIONS=' --directories=skip '
+#export GREP_OPTIONS=' --directories=skip '
 #export PS1="[\W]$ "
 export PATH=/home/jonco/bin:$PATH
 export VISUAL=gvim
@@ -179,3 +179,7 @@ function pull_wav ()
 
 
 export PATH="/opt/microchip/xc32/v1.21/bin":$PATH
+
+# User specific aliases and functions
+export AWS_DEFAULT_OUTPUT=json
+

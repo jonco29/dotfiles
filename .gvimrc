@@ -406,3 +406,26 @@ autocmd FileType python :iabbrev <buffer> iff if:<left>
 autocmd FileType javascript :iabbrev <buffer> iff if ()<left>
 
 
+"boxr
+let g:mediawiki_editor_url = 'boxr.am.mot.com'
+let g:mediawiki_editor_path = '/jconway/wiki/'
+let g:mediawiki_editor_username = 'jonco'
+let g:mediawiki_editor_uri_scheme = 'http'
+
+
+" "local
+" let g:mediawiki_editor_url = 'jc-mint.am.mot.com'
+" let g:mediawiki_editor_path = '/~jonco/wiki/'
+" let g:mediawiki_editor_username = 'jonco'
+
+
+" " "home wiki
+" let g:mediawiki_editor_url = 'jonco-wiki.duckdns.org'
+" let g:mediawiki_editor_path = '/wiki/'
+" let g:mediawiki_editor_username = 'jonco'
+" let g:mediawiki_editor_uri_scheme = 'https'
+
+
+nmap ,f :e ++ff=dos<CR>
+
+
