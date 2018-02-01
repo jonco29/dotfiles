@@ -50,7 +50,7 @@ nnoremap <unique> <A-0> 10gt
 nnoremap <unique> <A-h> gT
 nnoremap <unique> <A-l> gt
 nnoremap <silent> <A-H> :call <SID>LiteTabMove(-2)<CR>
-nnoremap <silent> <A-L> :call <SID>LiteTabMove(0)<CR>
+nnoremap <silent> <A-L> :call <SID>LiteTabMove(1)<CR>
 
 function! s:LiteTabMove(idx)
 	let index = tabpagenr() + a:idx

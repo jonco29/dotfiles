@@ -1,0 +1,33 @@
+#!/bin/bash
+
+if [[ $# -ne 1 ]]; then
+    #NAME=basename `$0`
+    NAME=$(echo $0|sed 's,^.*[/\\],,')
+    echo "usage: $NAME version"
+    echo "where: version is something like D01.00.21"
+    exit 1
+fi
+
+VERSION=$1
+
+PAL_DIR="../../../tools/mackinaw/"
+
+## do the basic images first
+for i in all factory; do
+    for j in pre prod; do
+        echo "srec_formatter.pl pal_${i}_input.${j}.txt mace_${i}_${j}.srec 01A00000 $VERSION"
+        srec_formatter.pl ${PAL_DIR}pal_${i}_input.${j}.txt mace_${i}_${j}.srec 01A00000 $VERSION
+        if [[ $? -gt 0 ]]; then
+            exit 1
+        fi
+        echo
+    done
+done
+
+
+## do the image upgrade image last
+echo "srec_formatter.pl pal_flashport_input.prod.txt mace_flashport_prod.srec 01A00000 $VERSION"
+srec_formatter.pl pal_flashport_input.prod.txt mace_flashport_prod.srec 01A00000 $VERSION
+if [[ $? -gt 0 ]]; then
+    exit 1
+fi

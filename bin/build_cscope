@@ -1,0 +1,15 @@
+#!/bin/bash
+
+rm -rf tags cscope.out cscope.files
+
+find . -iname '*.[ch]pp' -or -iname '*.[ch]' -or -iname '*.java' > cscope.files
+
+
+echo "building ctags..."
+ctags -L  cscope.files
+
+echo building cscope database
+cscope -k -i cscope.files -b 
+
+
+cscope -C  
