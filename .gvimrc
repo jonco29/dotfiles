@@ -13,15 +13,23 @@ set ru
 set nrformats=hex,alpha
 set ul=100
 "set backupdir=d:/Temp
+set nu
+set guioptions=amTtrbe
+set mouse=nvc
+set cwh=150
+set vb
+set lbr
+syntax on
+
+autocmd VimResized * wincmd =
+if &diff
+    win 120 120
+endif
 
 
-"set tags=./tags,tags,./tags.local
-"syntax on
+
 hi Normal guibg=White guifg=Black
-
 hi DiffText term=bold guibg=cyan guifg=black
-
-
 " from the file: /users/jonco/share/vim/vim58/syntax/synload.vim
 "  hi Comment    term=bold ctermfg=DarkBlue guifg=Blue
 "  hi Constant   term=underline ctermfg=DarkRed guifg=Magenta
@@ -70,9 +78,6 @@ noremap {{ :let @j=@/<CR>k?^ *\(\w\+ \)\(\w\+[ \[\]]*\)\{1,10}(.*).*\n* *{<CR>:l
 :inoremap # X#
 set tags=tags,tags.jc
 noremap vbfn /\*\{20,<CR>
-"set guifont=-schumacher-clean-medium-r-normal-*-*-100-*-*-c-*-iso646.1991-irv
-"set guifont=-schumacher-clean-medium-r-normal-*-*-120-*-*-c-*-iso646.1991-irv
-"set guifont=-adobe-courier-medium-r-normal-*-*-120-*-*-m-*-iso8859-9
 noremap <C-r>   :redo<Esc>
 noremap <A-l>   :tabn<CR>
 noremap <A-k>   :tabn<CR>
@@ -97,32 +102,13 @@ if &shell !~ "sh"
     
 else
     " this is a cygwin instance
-    "set guifont=-schumacher-clean-medium-r-normal-*-*-120-*-*-c-*-iso646.1991-irv
-    "set guifont=Fixed\ 6
-    "set guifont=Monospace\ 6
     "set guifont=Monospace\ 7
     set guifont=Monospace\ 10
-    "set guifont==Fixed\ Semi-Condensed:8
     " if you want side by side diffs, add 'vertical to diffopt
     "set diffopt=iwhite,vertical
     " horizontal is the up/down diffs
     "set diffopt=iwhite
     set diffopt=iwhite,filler,context:10000
-    "colorscheme elflord
-
-    " if &term =~ "xterm"
-    "   if has("terminfo")
-    " 	set t_Co=8
-    " 	set t_Sf=<Esc>[3%p1%dm
-    " 	set t_Sb=<Esc>[4%p1%dm
-    "   else
-    " 	set t_Co=8
-    " 	set t_Sf=<Esc>[3%dm
-    " 	set t_Sb=<Esc>[4%dm
-    "   endif
-    " endif
-	" :set t_AB=<Esc>[%?%p1%{8}%<%t25;%p1%{40}%+%e5;%p1%{32}%+%;%dm
-	" :set t_AF=<Esc>[%?%p1%{8}%<%t22;%p1%{30}%+%e1;%p1%{22}%+%;%dm
 endif
 
 
@@ -142,25 +128,6 @@ set grepprg=grep\ -nH\ $*
 " OPTIONAL: This enables automatic indentation as you type.
 filetype indent on
 
-
-set guioptions=amTtrbe
-set mouse=nvc
-set cwh=150
-set vb
-"let g:ccaseUseDialog=0	" Don't use dialog boxes
-set lbr
-set diffexpr=MyDiff()
-function! MyDiff()
-   let opt = ""
-   if &diffopt =~ "icase"
-     let opt = opt . "-i "
-   endif
-   if &diffopt =~ "iwhite"
-     let opt = opt . "-w -B "
-   endif
-   silent execute "!diff -a --binary " . opt . v:fname_in . " " . v:fname_new .
-	\  " > " . v:fname_out
-endfunction
 
 " function to start numbering
 let g:jc_current_number = 1
@@ -188,121 +155,9 @@ endf
 "" command to set StartNumber to a value if it exists
 ":command -nargs=* StartNumber :call StartNumber(<f-args>)
 "" maps to number & set the start number to 1
-"noremap <F2> :call StartNumber()<CR>
-"noremap <F3> :call Number()<CR>j
+noremap <F2> :call StartNumber()<CR>
+noremap <F3> :call Number()<CR>j
 
-" function to do a clearcase diff on the current branch
-" "will by default do the predecessor
-" or version 0 if a predecessor does not exist
-" or against the supplied version number
-" note, you can diff w/ newer versions too
-:fu! Clt_diff_same_branch(...)
-    let my_file = expand("%:p")
-    if my_file !~ "@@"
-        let my_file = system('cleartool ls -s ' . l:my_file)
-        let my_file = substitute(l:my_file, ".CHECKEDOUT.*$","","")
-        let my_file = substitute(l:my_file, "[\\\\]","/","g")
-        "echo my_file
-    else
-        let my_file = substitute(l:my_file,"[\\\\/][0-9][^0-9]*$","","")
-    endif
-    "echo my_file
-    "let my_prev_ver = expand("%:t")
-    let my_prev_ver = my_file
-    echo my_prev_ver
-    if a:0 > 0
-        if a:1 >= 0
-            let my_prev_ver = a:1
-        else 
-            let my_prev_ver = 0
-        endif
-    else
-        let my_prev_ver = my_prev_ver - 1
-        if my_prev_ver < 0
-            let my_prev_ver = 0
-        endif
-    endif
-    let tmp = my_file . "/" . my_prev_ver
-    echo "diffing vs. " . tmp
-    exe ":diffsplit "tmp
-endfu
-" wrapper command for easier invocation
-:command! -nargs=* Ctb :call Clt_diff_same_branch(<f-args>)
-
-
-
-" command to do a clearcase diff on another branch.
-" if another branch is not supplied, it will diff
-" against /main/LATEST
-:fu! Clt_diff_other_branch(...)
-    "let my_file = expand("%:h")
-    let my_file = expand("%:p")
-    let my_file = substitute(l:my_file,"[\\\\/][0-9][^0-9]*$","","")
-    let my_file = substitute(l:my_file, "@@.*", "", "") 
-    echo "this is my file: " . my_file
-
-    " check the number of arguments
-    if a:0 > 0
-        let tmp = substitute(a:1, "\\","/", "g")
-        let tmp = substitute(a:1, "'","", "g")
-        let my_file = my_file . "@@/" . tmp
-    else
-        let my_file = my_file . "@@/main/LATEST"
-    endif
-    echo my_file
-    exe ":diffsplit " my_file
-endf
-" wrapper command for easier invocation
-:command! -nargs=* Cto :call Clt_diff_other_branch(<f-args>)
-    
-" command to do a clearcase diff against another version on main
-" if another branch is not supplied, it will diff
-" against /main/LATEST
-:fu! Clt_diff_main_branch(...)
-    :let my_file = expand("%:h")
-    let my_file = expand("%:p")
-    let my_file = substitute(l:my_file,"[\\\\/][0-9][^0-9]*$","","")
-    let my_file = substitute(l:my_file, "@@.*", "", "") 
-    if a:0 > 0
-        let my_file = my_file . "@@/main/" . a:1
-    else
-        let my_file = my_file . "@@/main/LATEST"
-    endif
-    echo my_file
-    exe ":diffsplit " my_file
-endf
-" wrapper command for easier invocation
-:command! -nargs=* Ctm :call Clt_diff_main_branch(<f-args>)
-
-" command to do a clearcase diff against this file with a tag
-:fu! Clt_diff_tag(...)
-    :let my_file = expand("%:h")
-    let my_file = expand("%:p")
-    let my_file = substitute(l:my_file,"[\\\\/][0-9][^0-9]*$","","")
-    let my_file = substitute(l:my_file, "@@.*", "", "") 
-    if a:0 > 0
-        let my_file = my_file . "@@/" . a:1
-    else
-        let my_file = my_file . "@@/main/LATEST"
-    endif
-    echo my_file
-    exe ":diffsplit " my_file
-endf
-" wrapper command for easier invocation
-:command! -nargs=* Ctt :call Clt_diff_tag(<f-args>)
-noremap ctm :Ctm
-noremap ctb :Ctb
-noremap cto :Cto
-noremap ctt :Ctt
-    
-
-fu! Get_file_name ()
-    let fn = expand ("%")
-    let fn = substitute(l:fn, "@@.*", "", "")
-    let fn = substitute(l:fn, "^.*[\\/]", "", "")
-    echo fn
-    :r echo l:fn
-endf
 
 " if insert mode is set, do these
 if &insertmode
@@ -351,8 +206,6 @@ endif
 endf
 " wrapper command for easier invocation
 :command! -nargs=* RN :call Remove_New(<f-args>)
-syntax on
-set nu
 
 
 "set showtabline=2 " always show tabs in gvim, but not vim
@@ -389,43 +242,52 @@ function! GuiTabLabel()
 endfunction
 set guitablabel=%{GuiTabLabel()}
 
-"echo ">^.^<"
-" vimscript stuff
-nnoremap <c-u> viwU<esc>
-inoremap <c-u> <esc><c-u>
-inoremap jk <esc>
+"" "echo ">^.^<"
+"" " vimscript stuff
+"" nnoremap <c-u> viwU<esc>
+"" inoremap <c-u> <esc><c-u>
+"" inoremap jk <esc>
 
-"auto commands to format when writing
-augroup format_write
-    autocmd!
-    autocmd BufWritePre *.html :normal gg=G
-    autocmd BufWritePre *.[ch] :normal gg=G
-augroup END
+" ""auto commands to format when writing
+" "augroup format_write
+" "    autocmd!
+" "    autocmd BufWritePre *.html :normal gg=G
+" "    autocmd BufWritePre *.[ch] :normal gg=G
+" "augroup END
+" 
+" autocmd FileType python :iabbrev <buffer> iff if:<left>
+" autocmd FileType javascript :iabbrev <buffer> iff if ()<left>
 
-autocmd FileType python :iabbrev <buffer> iff if:<left>
-autocmd FileType javascript :iabbrev <buffer> iff if ()<left>
-
-
-"boxr
-let g:mediawiki_editor_url = 'boxr.am.mot.com'
-let g:mediawiki_editor_path = '/jconway/wiki/'
-let g:mediawiki_editor_username = 'jonco'
-let g:mediawiki_editor_uri_scheme = 'http'
-
-
-" "local
-" let g:mediawiki_editor_url = 'jc-mint.am.mot.com'
-" let g:mediawiki_editor_path = '/~jonco/wiki/'
-" let g:mediawiki_editor_username = 'jonco'
-
-
-" " "home wiki
-" let g:mediawiki_editor_url = 'jonco-wiki.duckdns.org'
-" let g:mediawiki_editor_path = '/wiki/'
-" let g:mediawiki_editor_username = 'jonco'
-" let g:mediawiki_editor_uri_scheme = 'https'
-
-
-nmap ,f :e ++ff=dos<CR>
-
-
+"" " "boxr
+"" " let g:mediawiki_editor_url = 'boxr.am.mot.com'
+"" " let g:mediawiki_editor_path = '/jconway/wiki/'
+"" " let g:mediawiki_editor_username = 'jonco'
+"" "let g:mediawiki_editor_uri_scheme = 'http'
+"" 
+"" " "private
+"" " let g:mediawiki_editor_url = 'localhost'
+"" " let g:mediawiki_editor_path = '/~jonco/wiki/'
+"" " let g:mediawiki_editor_username = 'jonco'
+"" 
+"" " "private 2
+"" " let g:mediawiki_editor_url = 'jc-mint.am.mot.com'
+"" " let g:mediawiki_editor_path = '/~jonco/wiki/'
+"" " let g:mediawiki_editor_username = 'jonco'
+"" 
+"" ""moti wiki
+"" "let g:mediawiki_editor_url = 'jonco.duckdns.org'
+"" "let g:mediawiki_editor_path = '/moti-wiki/'
+"" "let g:mediawiki_editor_username = 'jonco'
+"" 
+"" " "home wiki
+"" let g:mediawiki_editor_url = 'jonco-wiki.duckdns.org'
+"" let g:mediawiki_editor_path = '/wiki/'
+"" let g:mediawiki_editor_username = 'jonco'
+"" 
+"" " "pw wiki
+"" "let g:mediawiki_editor_url = 'jonco-wiki.duckdns.org'
+"" "let g:mediawiki_editor_path = '/pw/'
+"" "let g:mediawiki_editor_username = 'jonco'
+"" 
+"" nmap ,f :e ++ff=dos<CR>
+"" 
